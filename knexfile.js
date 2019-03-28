@@ -37,7 +37,16 @@ module.exports = {
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: './migrations'
+    },
+    seeds: {
+      directory: './seeds'
+    },
+    // by defualt SQLite will not enforce foreign keys
+    pool:{
+      afterCreate: (connection, done)=>{
+        connection.run('PRAGMA foreign_key = ON',done); // enforce foreign key
+}
     }
   }
 
